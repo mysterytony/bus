@@ -1,0 +1,10 @@
+{
+  "configurations": [
+    {
+      "name": "Linux",
+      "intelliSenseMode": "clang-x64",
+      "cStandard": "c11"
+    }
+  ],
+  "version": 4
+}
