@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "C++ Launch",
+            "name": "WSL C++ Launch",
             "type": "cppdbg",
             "request": "launch",
             "program": "/home/tonyli/bus/a.out",
@@ -26,29 +26,8 @@
             },
             "logging": {
                 "programOutput": true
-            }
-        },
-        {
-            "name": "C++ Launch 1",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "\\\\sshfs\\tonyli@localhost\\bus\\a.out",
-            "miDebuggerServerAddress": "localhost:9091",
-            "miDebuggerPath": "C:/MinGW/bin/gdb.exe",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceRoot}",
-            "environment": [],
-            "externalConsole": true,
-            "linux": {
-                "MIMode": "gdb"
             },
-            "osx": {
-                "MIMode": "gdb"
-            },
-            "windows": {
-                "MIMode": "gdb"
-            }
+            "preLaunchTask": "build"
         }
     ]
 }

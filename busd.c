@@ -104,7 +104,7 @@ int main(int argc, char const *argv[]) {
     rc = send(client_sock, buf, strlen(buf), 0);
     if (errno == EPIPE) {
       close(client_sock);
-    } else if (rc != 0) {
+    } else if (rc < 0) {
       printf("send error: %s", strerror(errno));
       close(server_sock);
       close(client_sock);
