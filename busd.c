@@ -15,6 +15,7 @@ https://www.ibm.com/support/knowledgecenter/en/SSB23S_1.1.0.14/gtpc1/unixsock.ht
 
 #define SOCK_PATH "/tmp/busd.sock"
 #define DATA "Hello from the server"
+#define BUFF_SIZE 256
 
 int main(int argc, char const *argv[]) {
   // ignores the SIGPIPE the broken pipe signal
@@ -24,15 +25,16 @@ int main(int argc, char const *argv[]) {
   signal(SIGPIPE, SIG_IGN);
 
   // variables
-  int server_sock, client_sock, len, rc;
+  int server_sock, client_sock, rc;
+  socklen_t len;
   int bytes_rec = 0;
   struct sockaddr_un server_sockaddr;
   struct sockaddr_un client_sockaddr;
-  char buf[10];
+  char buf[BUFF_SIZE];
   int backlog = 10;
   memset(&server_sockaddr, 0, sizeof(struct sockaddr_un));
   memset(&client_sockaddr, 0, sizeof(struct sockaddr_un));
-  memset(buf, 0, 256);
+  memset(buf, 0, BUFF_SIZE);
 
   // create a unix domain stream socket
   server_sock = socket(AF_UNIX, SOCK_STREAM, 0);
@@ -87,7 +89,7 @@ int main(int argc, char const *argv[]) {
     }
 
     // read
-    memset(buf, 0, 256);
+    memset(buf, 0, BUFF_SIZE);
     bytes_rec = recv(client_sock, buf, sizeof(buf), 0);
     if (bytes_rec < 0) {
       printf("recv error: %s\n", strerror(errno));
@@ -99,7 +101,7 @@ int main(int argc, char const *argv[]) {
     }
 
     // send data
-    memset(buf, 0, 256);
+    memset(buf, 0, BUFF_SIZE);
     strcpy(buf, DATA);
     rc = send(client_sock, buf, strlen(buf), 0);
     if (errno == EPIPE) {
