@@ -8,7 +8,7 @@ def constructParser(parser):
   parser.add_argument('-s', "--server_path", help="specify path of bus server executable file")
   parser.add_argument('-c', "--config", help="specify path of configuration file")
   parser.add_argument('-b', "--background", action='store_true', help="run in the background")
-  parser.add_argument('-k', "-kill", action='store_true', help="kill all bus instances")
+  parser.add_argument('-k', "--kill", action='store_true', help="kill all bus instances")
 
 def main():
   bin_path = './a.out'
@@ -41,4 +41,3 @@ def start(bin_path, background):
 
 if __name__ == "__main__":
     main()
-    # test()
