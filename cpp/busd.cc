@@ -77,9 +77,10 @@ void BUSD::Start() {
             printf("received data %s\n", buf);
         }
 
+        std::string result = ProcessRequest(std::string(buf));
+
         // send data
-        memset(buf, 0, BUFF_SIZE);
-        strcpy(buf, DATA);
+        strcpy(buf, result.c_str());
         rc = send(client_sock, buf, strlen(buf), 0);
         if (errno == EPIPE) {
             close(client_sock);
@@ -95,4 +96,41 @@ void BUSD::Start() {
 
     close(server_sock);
     close(client_sock);
+}
+
+long parseInt(const std::string &s, int &i) {
+    long result = 0;
+    while (i < (int)s.size() && isdigit(s[i])) {
+        result = (s[i] - '0') + result * 10; ++i;
+    }
+    return result;
+}
+
+int parseExpr(const std::string &s, int &i) {
+    long term = 0;
+    long result = 0;
+    char op = '+';
+
+    for (; i < (int)s.size() && op != ')'; ++i) {
+        if (s[i] == ' ') continue;
+
+        long n = s[i] == '(' ? parseExpr(s, ++i) : parseInt(s, i);
+
+        switch(op) {
+            case '+': result += term; term = n; break;
+            case '-': result += term; term = -n; break;
+            case '*': term *= n; break;
+            case '/': term /= n; break;
+        }
+
+        op = s[i];
+    }
+
+    return result + term;
+}
+
+std::string BUSD::ProcessRequest(const std::string& request) const {
+    // no actual server implemented yet, just process everything here
+    int index = 0;
+    return std::to_string(parseExpr(request, index));
 }

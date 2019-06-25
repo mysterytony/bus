@@ -12,6 +12,7 @@ https://www.ibm.com/support/knowledgecenter/en/SSB23S_1.1.0.14/gtpc1/unixsock.ht
 #include <sys/types.h>
 #include <sys/un.h>
 #include <unistd.h>
+#include <string>
 
 #define SOCK_PATH "/tmp/busd.sock"
 #define DATA "Hello from the server"
@@ -21,6 +22,7 @@ class BUSD {
 public:
     BUSD();
     void RegisterFunction();
+    std::string ProcessRequest(const std::string& request) const;
     void Start();
 
 private:

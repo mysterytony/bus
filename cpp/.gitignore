@@ -1,0 +1,5 @@
+daemon
+cpp_client
+*.o
+*.d
+
