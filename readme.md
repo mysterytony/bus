@@ -1,5 +1,7 @@
 ### Example Flow
 
+**check the example folder**
+
 In one example flow, we have one group of developers develop a server framework. Then uses bus to expose its endpoints and publishes to bus hub.
 
 The second group downloads this library from bus hub and uses in their server.
