@@ -1,2 +1,7 @@
 a.out
 busd
+
+.vscode/
+*.o
+*.elf
+a.out

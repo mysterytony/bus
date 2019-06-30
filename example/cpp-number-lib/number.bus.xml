@@ -1,0 +1,22 @@
+<!-- currently, in bus definition, is an array of elements at top level; they can be a class, a namespace, a function, a variable or a constant -->
+<bus-package name="number">
+  <!-- this describes the number class-->
+  <class name="number">
+    <function special-type="constructor">
+      <param name="r" type="double"/>
+      <param name="c" type="double"/>
+    </function>
+
+    <!-- there's no Java equivalent desctructor -->
+    <function special-type="destructor" />
+
+    <function name="increment">
+    <function name="getLength" return-type="double" />
+  </class>
+
+  <!-- Java doesn't support operator overloading, so we may expose an add(...) function at top level. Note this definition doesn't belong to the number class. Even in C++, you can overload operator+ outside of a class.-->
+  <function special-type="add" />
+
+  <!-- this describes the special case for print this class, in c++ we overload the ostream<< operator, in Java, we implement toString() function. We need to be capable of detect toString() definitions in Java side too-->
+  <function special-type="print" />
+</bus-package>
